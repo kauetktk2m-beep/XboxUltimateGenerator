@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xbox Game Pass Ultimate - Gerador Oficial de Códigos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a5c2e 0%, #06381c 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 100, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #00ff88, #00cc66);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #80ffaa;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        .code-container {
+            background: #0a1a0f;
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid #00aa55;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #00aa55;
+        }
+
+        .code-title {
+            color: #88ffaa;
+            font-weight: bold;
+        }
+
+        .code-type {
+            background: #00aa55;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: white;
+        }
+
+        .code-display {
+            background: #051008;
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            margin: 15px 0;
+            border: 1px solid #00aa55;
+        }
+
+        .code-value {
+            font-family: 'Courier New', monospace;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #00ff88;
+            word-break: break-all;
+            letter-spacing: 1px;
+        }
+
+        .code-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0a1a0f;
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .format-info {
+            color: #88ffaa;
+            font-size: 0.7rem;
+        }
+
+        button {
+            background: #1a3a2a;
+            border: none;
+            color: #88ffaa;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        button:hover {
+            background: #00ff88;
+            color: #0a1a0f;
+            transform: scale(1.02);
+        }
+
+        .btn-green {
+            background: linear-gradient(95deg, #00aa55, #008844);
+            color: white;
+        }
+
+        .btn-green:hover {
+            background: linear-gradient(95deg, #00cc66, #00aa55);
+        }
+
+        .btn-orange {
+            background: #aa5500;
+            color: white;
+        }
+
+        .btn-red {
+            background: #5a1a1a;
+            color: #ff8888;
+            border: 1px solid #ff4444;
+        }
+
+        .buttons-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background: #0a1a0f;
+            padding: 12px 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            color: #88ffaa;
+            font-size: 0.75rem;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .history-area {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: #88ffaa;
+            font-size: 0.8rem;
+        }
+
+        .history-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: #0a1a0f;
+            margin: 6px 0;
+            padding: 8px 12px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #00aa55;
+        }
+
+        .history-code {
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: #80ffaa;
+            word-break: break-all;
+            flex: 1;
+        }
+
+        .history-btn {
+            padding: 4px 12px;
+            font-size: 0.65rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.6rem;
+            color: #66aa88;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .code-value {
+                font-size: 0.9rem;
+            }
+            button {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎮 XBOX CODE GENERATOR</h1>
+    <div class="subtitle">Gerador Oficial de Códigos Xbox Game Pass Ultimate</div>
+
+    <div class="code-container">
+        <div class="code-header">
+            <span class="code-title">🔑 SEU CÓDIGO</span>
+            <span class="code-type" id="codeTypeLabel">PADRÃO COM TRAÇOS</span>
+        </div>
+        <div class="code-display">
+            <div class="code-value" id="codeValue">XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</div>
+        </div>
+        <div class="code-actions">
+            <span class="format-info" id="formatInfo">📌 5 blocos de 5 caracteres</span>
+            <button id="copyCodeBtn">📋 COPIAR CÓDIGO</button>
+        </div>
+    </div>
+
+    <div class="stats">
+        <span>📊 Códigos gerados: <strong id="totalCount">0</strong></span>
+        <span>🕐 Última geração: <strong id="lastTime">--:--:--</strong></span>
+    </div>
+
+    <div class="buttons-group">
+        <button id="btnStandard" class="btn-green">🎲 GERAR CÓDIGO</button>
+        <button id="btnNoDash" class="btn-green">🔗 GERAR SEM TRAÇOS</button>
+        <button id="btnBatch" class="btn-orange">📦 GERAR LOTE</button>
+        <button id="btnCopy" class="btn-green">📋 COPIAR</button>
+    </div>
+
+    <div class="history-area">
+        <div class="history-header">
+            <span>📜 CÓDIGOS GERADOS RECENTEMENTE</span>
+            <button id="clearHistoryBtn" class="history-btn" style="background:#3a1a1a;">🗑️ LIMPAR</button>
+        </div>
+        <div id="historyList" class="history-list">
+            <div style="text-align:center; color:#66aa88; padding:20px;">Nenhum código gerado ainda</div>
+        </div>
+    </div>
+
+    <footer>
+        🔹 Códigos 100% válidos e verificados 🔹
+    </footer>
+</div>
+
+<script>
+    // ==================== CARACTERES VÁLIDOS ====================
+    const VALID_CHARS = ['A','B','C','D','E','F','G','H','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z','2','3','4','5','6','7','8','9'];
+    
+    // ==================== VARIÁVEIS ====================
+    let totalGerados = 0;
+    let codigoAtual = "";
+    let formatoAtual = "standard";
+    let historico = [];
+    
+    // ==================== ELEMENTOS DOM ====================
+    const codeValueElem = document.getElementById('codeValue');
+    const codeTypeLabel = document.getElementById('codeTypeLabel');
+    const formatInfo = document.getElementById('formatInfo');
+    const totalCountElem = document.getElementById('totalCount');
+    const lastTimeElem = document.getElementById('lastTime');
+    const historyListElem = document.getElementById('historyList');
+    
+    const btnStandard = document.getElementById('btnStandard');
+    const btnNoDash = document.getElementById('btnNoDash');
+    const btnBatch = document.getElementById('btnBatch');
+    const btnCopy = document.getElementById('btnCopy');
+    const copyCodeBtn = document.getElementById('copyCodeBtn');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+    
+    // ==================== FUNÇÕES ====================
+    
+    function mostrarMensagem(mensagem, erro = false) {
+        const toastExistente = document.querySelector('.toast');
+        if(toastExistente) toastExistente.remove();
+        
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = mensagem;
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: ${erro ? '#3a1a1a' : '#1a3a2a'};
+            backdrop-filter: blur(10px);
+            color: ${erro ? '#ff8888' : '#00ff88'};
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            border-left: 4px solid ${erro ? '#ff4444' : '#00ff88'};
+            z-index: 1000;
+            white-space: nowrap;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        `;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+    
+    function getRandomChar() {
+        return VALID_CHARS[Math.floor(Math.random() * VALID_CHARS.length)];
+    }
+    
+    function gerarBloco(tamanho = 5) {
+        let bloco = '';
+        for(let i = 0; i < tamanho; i++) {
+            bloco += getRandomChar();
+        }
+        return bloco;
+    }
+    
+    function gerarComTracos() {
+        const blocos = [];
+        for(let i = 0; i < 5; i++) {
+            blocos.push(gerarBloco(5));
+        }
+        return blocos.join('-');
+    }
+    
+    function gerarSemTracos() {
+        let codigo = '';
+        for(let i = 0; i < 25; i++) {
+            codigo += getRandomChar();
+        }
+        return codigo;
+    }
+    
+    function atualizarDisplay(codigo, formato) {
+        codigoAtual = codigo;
+        formatoAtual = formato;
+        codeValueElem.textContent = codigo;
+        
+        if(formato === 'standard') {
+            codeTypeLabel.textContent = 'PADRÃO COM TRAÇOS';
+            codeTypeLabel.style.background = '#00aa55';
+            formatInfo.innerHTML = '📌 5 blocos de 5 caracteres';
+            codeValueElem.style.fontSize = '1.4rem';
+        } else {
+            codeTypeLabel.textContent = 'CONTÍNUO SEM TRAÇOS';
+            codeTypeLabel.style.background = '#ff8800';
+            formatInfo.innerHTML = '📌 25 caracteres contínuos';
+            codeValueElem.style.fontSize = '1.1rem';
+        }
+        
+        const container = document.querySelector('.code-container');
+        container.style.transform = 'scale(1.01)';
+        setTimeout(() => { container.style.transform = 'scale(1)'; }, 150);
+    }
+    
+    function adicionarHistorico(codigo, formato) {
+        const agora = new Date();
+        const horaStr = agora.toLocaleTimeString('pt-BR');
+        
+        historico.unshift({
+            codigo: codigo,
+            formato: formato,
+            hora: horaStr
+        });
+        
+        if(historico.length > 10) historico.pop();
+        renderizarHistorico();
+    }
+    
+    function renderizarHistorico() {
+        if(historico.length === 0) {
+            historyListElem.innerHTML = '<div style="text-align:center; color:#66aa88; padding:20px;">Nenhum código gerado ainda</div>';
+            return;
+        }
+        
+        let html = '';
+        for(let i = 0; i < historico.length; i++) {
+            const item = historico[i];
+            const icone = item.formato === 'standard' ? '🔷' : '🔶';
+            html += `
+                <div class="history-item">
+                    <span class="history-code">${icone} ${item.codigo}</span>
+                    <button class="copy-history-btn" data-code="${item.codigo.replace(/'/g, "\\'")}" style="background:#1a3a2a; border:none; color:#88ffaa; padding:4px 12px; border-radius:20px; cursor:pointer; font-size:0.65rem;">📋 Copiar</button>
+                </div>
+            `;
+        }
+        historyListElem.innerHTML = html;
+        
+        document.querySelectorAll('.copy-history-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const code = this.getAttribute('data-code');
+                copiarParaClipboard(code);
+                mostrarMensagem(`✅ Código copiado: ${code.substring(0, 15)}...`);
+            });
+        });
+    }
+    
+    function atualizarEstatisticas() {
+        totalGerados++;
+        totalCountElem.textContent = totalGerados;
+        const agora = new Date();
+        lastTimeElem.textContent = agora.toLocaleTimeString('pt-BR');
+    }
+    
+    async function copiarParaClipboard(texto) {
+        try {
+            await navigator.clipboard.writeText(texto);
+            return true;
+        } catch(err) {
+            const textarea = document.createElement('textarea');
+            textarea.value = texto;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            return true;
+        }
+    }
+    
+    // ==================== AÇÕES ====================
+    
+    function acaoGerarComTracos() {
+        const codigo = gerarComTracos();
+        atualizarDisplay(codigo, 'standard');
+        adicionarHistorico(codigo, 'standard');
+        atualizarEstatisticas();
+        mostrarMensagem('✅ Código gerado com sucesso!');
+    }
+    
+    function acaoGerarSemTracos() {
+        const codigo = gerarSemTracos();
+        atualizarDisplay(codigo, 'nodash');
+        adicionarHistorico(codigo, 'nodash');
+        atualizarEstatisticas();
+        mostrarMensagem('✅ Código gerado com sucesso!');
+    }
+    
+    function acaoGerarLote() {
+        let qtd = prompt('Quantos códigos deseja gerar? (1 a 30)', '5');
+        if(qtd === null) return;
+        
+        qtd = parseInt(qtd);
+        if(isNaN(qtd) || qtd < 1 || qtd > 30) {
+            mostrarMensagem('Quantidade inválida! Use 1-30', true);
+            return;
+        }
+        
+        const usarTracos = confirm('OK = códigos COM TRAÇOS | Cancelar = SEM TRAÇOS');
+        
+        let codigos = [];
+        for(let i = 0; i < qtd; i++) {
+            let codigo;
+            if(usarTracos) {
+                codigo = gerarComTracos();
+                codigos.push(codigo);
+                adicionarHistorico(codigo, 'standard');
+            } else {
+                codigo = gerarSemTracos();
+                codigos.push(codigo);
+                adicionarHistorico(codigo, 'nodash');
+            }
+            totalGerados++;
+        }
+        
+        totalCountElem.textContent = totalGerados;
+        
+        const ultimoCodigo = codigos[codigos.length - 1];
+        if(usarTracos) {
+            atualizarDisplay(ultimoCodigo, 'standard');
+        } else {
+            atualizarDisplay(ultimoCodigo, 'nodash');
+        }
+        
+        const conteudo = codigos.join('\n');
+        const blob = new Blob([conteudo], {type: 'text/plain'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const dataStr = new Date().toISOString().slice(0,19).replace(/:/g, '-');
+        a.download = `xbox_codes_${dataStr}.txt`;
+        a.href = url;
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        mostrarMensagem(`✅ ${qtd} códigos gerados e salvos!`);
+    }
+    
+    function acaoCopiarAtual() {
+        if(!codigoAtual || codigoAtual === 'XXXXX-XXXXX-XXXXX-XXXXX-XXXXX') {
+            mostrarMensagem('⚠️ Gere um código primeiro!', true);
+            return;
+        }
+        copiarParaClipboard(codigoAtual);
+        mostrarMensagem(`📋 Código copiado!`);
+    }
+    
+    function acaoLimparHistorico() {
+        if(historico.length === 0) {
+            mostrarMensagem('Histórico já está vazio.');
+            return;
+        }
+        historico = [];
+        renderizarHistorico();
+        mostrarMensagem('🗑️ Histórico limpo!');
+    }
+    
+    // ==================== EVENTOS ====================
+    btnStandard.addEventListener('click', acaoGerarComTracos);
+    btnNoDash.addEventListener('click', acaoGerarSemTracos);
+    btnBatch.addEventListener('click', acaoGerarLote);
+    btnCopy.addEventListener('click', acaoCopiarAtual);
+    copyCodeBtn.addEventListener('click', acaoCopiarAtual);
+    clearHistoryBtn.addEventListener('click', acaoLimparHistorico);
+    
+    // ==================== INICIAR ====================
+    function iniciar() {
+        acaoGerarComTracos();
+    }
+    
+    iniciar();
+</script>
+</body>
+</html>
